@@ -1,7 +1,7 @@
 function Search() {
     return (
         <div className="search-container">
-        {/* <input type="text" placeholder="Search">Search</input> */}
+            <h3>Search bar goes here</h3>
         </div>
     )
 }
