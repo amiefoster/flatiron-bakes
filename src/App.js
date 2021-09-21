@@ -1,25 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import CakeCard from "./Cakecard.js";
+import Header from "./Header";
+import Search from "./Search";
+
+const cakes = [
+  {
+      flavor: 'Vanilla',
+      size: '6" cake',
+      price: 40.00
+  },
+  {
+      flavor: 'Raspberry Cardamon Rose',
+      size: '9" cake',
+      price: 50.00
+  },
+  {
+      flavor: 'Pink Champagne',
+      size: 'cup cake',
+      price: 37.5
+  },
+  {
+      flavor: 'Earl Grey',
+      size: 'cup cake',
+      price: 18.00
+  },
+{
+      flavor: 'Black Forest',
+      price: 18.00
+  }
+]
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      <Header />
+      <Search />
+
+      {cakes.map(cake => <CakeCard key={cake.flavor} flavor={cake.flavor} price={cake.price} size={cake.size}/>)};
+  
+    </>
+    
+  )
 }
 
 export default App;
