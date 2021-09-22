@@ -13,7 +13,7 @@ function App() {
     <>
       <Header />
       {visible ? <Search /> : null}
-      <button onClick={() => setVisible(!visible)}>{visible ? 'x' : 'Form'}</button>
+      <button onClick={() => setVisible(!visible)}>{visible ? 'Goodbye Form' : 'Form'}</button>
 
       {cakes.map(cake => <CakeCard key={cake.flavor} flavor={cake.flavor} price={cake.price} size={cake.size}/>)};
   
