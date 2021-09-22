@@ -1,7 +1,11 @@
 function Search() {
     return (
         <div className="search-container">
-            <h3>Search bar goes here</h3>
+        <form>
+            <input type="text"></input>
+            <input type="submit" value="Submit"></input>
+
+        </form>
         </div>
     )
 }
