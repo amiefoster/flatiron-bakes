@@ -1,10 +1,10 @@
 
 
-function Cakecard({cake, setSelectedCake, handleRemove}) {
+function Cakecard({cake, setSelectedCake, handleRemove, setCakeList}) {
   
     return (
         <>
-        <div onClick={() => setSelectedCake(cake)}>
+        <div onClick={() => {setSelectedCake(cake)}}>
         <h1>{cake.flavor}</h1>
         <p>{cake.price}</p>
         <p>{cake.size}</p>
