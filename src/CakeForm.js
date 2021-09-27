@@ -23,7 +23,11 @@ function CakeForm( {handleAddCake} ) {
         handleAddCake(formData)
     }
 
+
+
     return (
+        <div>
+           
         <form onSubmit={handleSubmit}>
         <label>
             Flavor
@@ -57,6 +61,7 @@ function CakeForm( {handleAddCake} ) {
         </label>
         <input type="submit"></input>
         </form>
+        </div>
     )
 }
 
