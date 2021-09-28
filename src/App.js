@@ -5,7 +5,7 @@ import Search from "./Search";
 import { useState, useEffect} from "react"
 import CakeDetail from "./CakeDetail"
 import CakeForm from "./CakeForm"
-import FlavorFilter from "./FlavorFilter"
+//import FlavorFilter from "./FlavorFilter"
 
 
 
@@ -14,19 +14,16 @@ function App( ) {
   const [visible, setVisible] = useState(false)
   const[selectedCake, setSelectedCake] = useState(null)
   const [cakeList, setCakeList] = useState([])
-  const [flavorList, setFlavorList] = useState([])
+  //const [flavorList, setFlavorList] = useState([])
   console.log(cakeList)
 
   useEffect(() => {
-    fetch('http://localhost:4002/cakes')
+    fetch('http://localhost:4000/cakes')
     .then(response => response.json())
     .then(data => setCakeList(data))
-    fetch('http://localhost:4002/flavor')
-    .then(response => response.json())
-    .then(data => setFlavorList(data))
+ 
   }, [])
 
-  console.log(flavorList)
 
   const handleRemove = (event) => {
     const cakeToRemove = event.target.name
@@ -38,21 +35,45 @@ function App( ) {
   }
 
   function handleAddCake(cake) {
-    const newCake = cake
-    setCakeList([...cakeList, newCake])
+    fetch('http://localhost:4000/cakes', {
+        method: "POST", 
+        headers: {
+            'Content-Type': "application/jsonq",
+        },
+        body: JSON.stringify(cake)
+    })
+    .then(response => response.json())
+    .then(newCake => {
+        setCakeList([
+            ...cakeList, newCake
+        ])
+    })
+}
     
+
+
+  function handleDelete(id) {
+    fetch(`http://localhost:4000/cakes/${id}`, {
+      method:'DELETE'
+    })
+    .then(response => response.json())
+    .then(() => {
+      const filteredCakes = cakeList.filter(cake => cake.id !== id)
+      setCakeList(filteredCakes)
+      setSelectedCake(null)
+    })
   }
 
   return (
     <>
       <Header />
-      {flavorList.map(flavor => <FlavorFilter flavor={flavor} key={flavor}/>)}
+      
       <CakeForm handleAddCake={handleAddCake}/>
       {visible ? <Search /> : null}
       <button onClick={() => setVisible(!visible)}>{visible ? 'Goodbye Form' : 'Form'}</button>
 
       <br/>
-      {selectedCake ? <CakeDetail cake={selectedCake} /> : null}
+      {selectedCake ? <CakeDetail handleDelete={handleDelete} cake={selectedCake} /> : null}
       
       {cakeList.map(cake => <CakeCard handleRemove={handleRemove}  key={cake.flavor} cake={cake} setSelectedCake={setSelectedCake}/>)};
   

@@ -1,4 +1,4 @@
-function CakeDetail({cake}) {
+function CakeDetail({cake, handleDelete}) {
     
     return (
         <>
@@ -7,6 +7,7 @@ function CakeDetail({cake}) {
             <p>Size: {cake.size}</p>
             <p>Price: ${cake.price}</p>
             <p>{cake.description}</p>
+            <button onClick={() => handleDelete(cake.id)}>Delete</button>
         </>
     )
 }
